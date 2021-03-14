@@ -1,0 +1,219 @@
+\documentclass[oneside]{amsart}  % {{{1
+\usepackage{amssymb, mathtools, enumitem, booktabs, float, caption, tikz}
+\usepackage[final]{hyperref, microtype}
+
+% structure symbols
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\m}[1]{\mathbb{#1}}      % models
+\newcommand{\alg}[1]{\m{#1}}         % algebras
+\newcommand{\rel}[1]{\mathbf{#1}}    % relational structures
+\newcommand{\cl}[1]{\mathcal{#1}}    % classes
+\newcommand{\Comp}[1]{\textsf{#1}}   % complexity classes
+
+% theorems and similar environments
+\theoremstyle{plain}
+  \newtheorem{thm}{Theorem}           \newtheorem*{thm*}{Theorem}
+  \newtheorem{claim}{Claim}[thm]      \newtheorem*{claim*}{Claim}
+  \newtheorem{conj}[thm]{Conjecture}  \newtheorem*{conj*}{Conjecture}
+  \newtheorem{cor}[thm]{Corollary}    \newtheorem*{cor*}{Corollary}
+  \newtheorem{lem}[thm]{Lemma}        \newtheorem*{lem*}{Lemma}
+  \newtheorem{prop}[thm]{Proposition} \newtheorem*{prop*}{Proposition}
+\theoremstyle{definition}
+  \newtheorem{defn}[thm]{Definition} \newtheorem*{defn*}{Definition}
+  \newtheorem{ex}[thm]{Example}      \newtheorem*{ex*}{Example}
+\theoremstyle{remark}
+  \newtheorem{rk}[thm]{Remark}  \newtheorem*{rk*}{Remark}
+\newcommand{\Case}[1]{\smallskip \textbf{Case #1:}}
+\newenvironment{claimproof}
+  {
+    \begin{proof}[Proof of claim]
+    \renewcommand{\qedsymbol}{\ensuremath{\circ}}
+  } {
+    \end{proof}
+  }
+
+% custom commands
+\DeclareMathOperator{\Cg}{Cg}
+\DeclareMathOperator{\Clo}{Clo}
+\DeclareMathOperator{\Con}{Con}
+\DeclareMathOperator{\Inv}{Rel}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sg}{Sg}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\bmat}[1]{ \begin{bmatrix} #1 \end{bmatrix} }
+\newcommand{\Bmat}[1]{ \begin{Bmatrix} #1 \end{Bmatrix} }
+\newcommand{\pmat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }
+\newcommand{\mat}[1]{ \begin{matrix} #1 \end{matrix} }
+\newcommand{\ds}[1]{ \displaystyle{#1} }
+\newcommand{\stack}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\Proofitem}[1]{\smallskip \textbf{#1:}}
+
+% tikz
+\usetikzlibrary{calc, matrix, positioning}
+\newcommand{\TikzCenterNode}{\node (center) at ($(current bounding box.north east)!0.5!(current bounding box.south west)$) {\phantom{$\cdot$}};}
+
+% misc
+\numberwithin{equation}{section}  % number equations within sections
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\todo}[1]{\noindent\textbf{TODO: #1}}
+\renewcommand*{\arraystretch}{1.25} 
+\setlist[enumerate]{itemsep=0.5em}
+\setlist[itemize]{itemsep=0.5em}
+
+% homework/exam specific
+\usepackage[margin=1.5in, top=1in, bottom=1in]{geometry}
+\usepackage{environ}
+\newlist{questions}{enumerate}{2}
+\setlist[questions]{wide=0pt, parsep=0.5em, listparindent=\parindent, font=\bfseries}
+\setlist[questions,1]{label=\arabic*., itemsep=2\parsep, topsep=\itemsep+\parsep}
+\setlist[questions,2]{labelindent=\parindent, label=(\roman*), itemsep=\parsep}
+\setlist[questions,3]{labelindent=2\parindent, label=(\alph*)}
+\newcommand{\SolnItem}[1]{\smallskip\indent\textrm{\bf#1:}}
+\newenvironment{proofpart}[1] { \begin{proof}[\SolnItem{#1} Proof.] } { \end{proof} }
+\newif\ifsolutions
+\NewEnviron{solution}
+  {
+    \ifsolutions
+      \bigskip \noindent \textbf{Solution:} \BODY 
+    \fi
+  }
+  { }
+
+% document specific stuff
+% quantum
+\DeclareMathOperator{\Cspan}{ \CC-span }
+\DeclareMathOperator{\Tr}{ Tr }
+\newcommand{\B}{ \mathfrak{B} }
+\newcommand{\bra}[1]{ \left< #1 \right| }
+\newcommand{\ket}[1]{ \left| #1 \right> }
+\newcommand{\bracket}[2]{ \left< #1 \mid #2 \right> }
+\tikzset{gate-c/.style = {draw, circle, inner sep=0.25em}}
+\tikzset{gate-r/.style = {draw, rounded corners, rectangle}}
+\tikzset{control/.style = {draw, fill, circle, inner sep=0.1em}}
+\tikzset{circuit/.style = {matrix of math nodes, cells={anchor=center}, column 1/.style={anchor=east}}}
+\newcommand{\tikzMeasure}{
+  \begin{tikzpicture}[scale=0.2, baseline=0pt]
+    \draw (0,0) arc (180-20:20:1);
+    \draw[->] (current bounding box.north|-current bounding box.south) -- ++(60:1.5);
+  \end{tikzpicture} }
+
+% computation
+\renewcommand{\O}{\mathcal{O}}
+\DeclareMathOperator{\poly}{poly}
+%----------------------------------------------------------------------------}}}1
+
+\begin{document}  %\solutionstrue
+% title matter {{{1
+\title[Quantum Algorithms, HW 3 Additional Problems]
+  {Quantum Algorithms \\ Homework 3 Additional Problems}
+\author{Prof.~Matthew Moore}
+\maketitle
+
+\vspace{-0.7em} \begin{center}
+  \sc Due: 2021-02-23
+\end{center}
+%----------------------------------------------------------------------------}}}1
+
+\vspace{2em}
+
+\begin{questions}
+% Fermat's theorem   {{{1
+% ID: eiNoh6oo
+\item Compute $\ds{2^{3^{4^5}} \bmod 79}$. I suggest that you do this without
+using a computer. 
+\\ \noindent 
+[\emph{Hint: $78 = 2\cdot 3\cdot 13$.}]
+%----------------------------------------------------------------------------}}}1
+% Fermat's theorem   {{{1
+% ID: co0iu
+\item \begin{questions}
+  \item Compute $14^{15} \bmod{10}$. [\emph{Hint: look for a pattern
+    or use $10 = 2\cdot 5$.}]
+\begin{solution}  % {{{2
+Since $14\equiv 4 \pmod{10}$, we have that $14^{15} \equiv 4^{15}
+\pmod{10}$. A table of powers of $4$ modulo $10$ is given below.
+\[ \begin{array}{l|cccccccc}
+  k             & 1 & 2 & 3 & 4 & \cdots & 2\ell & 2\ell + 1 & \cdots \\ \midrule
+  4^k \bmod{10} & 4 & 6 & 4 & 6 & \cdots & 6     & 4         & \cdots
+\end{array} \]
+From it, we can see that $4^k \equiv 4 \pmod{10}$ if $k$ is odd and $4^k
+\equiv 8\pmod{10}$ is $k$ is even. Since $15$ is odd, we have that
+\[
+  14^{15}
+  \equiv 4^{15}
+  \equiv 4 \pmod{10}.
+\]
+
+Proceeding the other way suggested using the hint, we consider
+\[
+  14^{15} \bmod{2}
+  \qquad\text{and}\qquad
+  14^{15} \bmod{5}.
+\]
+Since $14 \equiv 0 \pmod{2}$, we have
+\[
+  14^{15}
+  \equiv 0^{15}
+  \equiv 0 \pmod{2}.
+\]
+Since $14 \equiv -1 \pmod{5}$, we have
+\[
+  14^{15}
+  \equiv (-1)^{15}
+  \equiv -1
+  \equiv 4 \pmod{5}
+\]
+The first of these tells us that $14^{15} = 2k$, and substituting this
+into the second one tells us that $2k \equiv -1 \pmod{5}$, so $k \equiv
+2 \pmod{5}$. Therefore $k = 2+5\ell$, and so
+\[
+  14^{15}
+  = 2k
+  = 2\cdot (2 + 5\ell)
+  = 4 + 10 \ell.
+\]
+It follows that $14^{15} \equiv 4 \pmod{10}$, just as we saw above.
+\end{solution}   % }}}2
+  \item Compute $\ds{13^{14^{15}} } \bmod{11}$.
+\begin{solution}  % {{{2
+The previous part implies that $14^{15} = 4 + 10\beta$. Since $13$ and
+$11$ are coprime, Fermat's theorem applies. Using it and the previous
+part, we have
+\[
+  13^{14^{15}}
+  \equiv
+  13^{4+10\beta}
+  \equiv
+  13^4 \cdot \big( 13^{10} \big)^{\beta}
+  \stackrel{\text{Fermat}}{\equiv} 13^4 \cdot (1)^{\beta}
+  \equiv 13^4
+  \equiv 2^4
+  \equiv 16
+  \equiv 5 \pmod{11}.
+\]
+\end{solution}   % }}}2
+\end{questions}
+%---------------------------------------------------------------------------}}}1
+% python, Miller-Rabin test   {{{1
+% ID: uoK9Uh3m
+\item Implement the Miller-Rabin probabilistic primality testing algorithm as
+presented in class (or in the textbook). Fill in the function
+\verb|is_prime_MR(q)| in the python source file. You need only submit your
+function with the homework, not the entire source file.
+%----------------------------------------------------------------------------}}}1
+% Miller-Rabin test   {{{1
+% ID: laiZool1
+\item Find five pairs of numbers $q\in \ZZ$ and $a \in \{1, \dots, q-1\}$ such
+that $q$ is composite but passes the Miller-Rabin test with the given choice of
+$a$.
+%----------------------------------------------------------------------------}}}1
+\end{questions} \end{document}
+
+\vfill \begin{center} \textbf{Problems continue on the next page.} \end{center} \vfill

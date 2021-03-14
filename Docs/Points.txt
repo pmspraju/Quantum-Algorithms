@@ -1,0 +1,8 @@
+https://ms.mcmaster.ca/~moorem16/quantum
+https://ms.mcmaster.ca/~moorem16/quantum/homework01_solns.pdf
+http://web.csulb.edu/~tebert/teaching/lectures/528/sat_2015/
+https://cp-algorithms.com/graph/2SAT.html
+http://logic.stanford.edu/intrologic/public/index.php
+http://web.cse.ohio-state.edu/~rademacher.10/Sp16_6321/   -- solutions
+https://www.whitman.edu/mathematics/higher_math_online/section03.02.html
+https://people.eecs.berkeley.edu/~vazirani/s09quantum/notes/
