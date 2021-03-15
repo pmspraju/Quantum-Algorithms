@@ -19,6 +19,11 @@
 \graphicspath{ {./images/} }
 
 
+\newcommand{\ket}[1]{| {#1} \rangle}
+\newcommand{\bra}[1]{\langle {#1} |}
+\newcommand{\braket}[2]{\langle #1 \ | \ #2 \rangle}
+\newcommand{\tensor}[2]{ #1 \otimes  #2 }
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -68,7 +73,34 @@
 
 \newpage
 
-{\bf 1.}
+{\bf 1.} Prove that the inner product and the tensor product commute: $\braket{\tensor{\alpha}{\beta}}{\tensor{\gamma}{\delta}} = \braket{\alpha}{\gamma} \braket{\beta}{\delta}$
 
+\phantom{1em} {\bf 1.} We know that $\ket{\varepsilon} = \bra{\varepsilon^{\dag}}$, where $\dag = Conjugate \ transpose$. Let, 
+
+\phantom{1000em} $\ket{\alpha} = \begin{bmatrix} \alpha_{1} \\ \alpha_{2}\end{bmatrix}, \ \ket{\beta} = \begin{bmatrix} \beta_{1} \\ \beta_{2}\end{bmatrix}, \ \ket{\gamma} = \begin{bmatrix} \gamma_{1} \\ \gamma_{2}\end{bmatrix}, \ \ket{\delta} = \begin{bmatrix} \delta_{1} \\ \delta_{2}\end{bmatrix}$
+
+\phantom{1000em} $\bra{\alpha^{\dag}} = \begin{bmatrix} \alpha^{\dag}_{1} & \alpha^{\dag}_{2}\end{bmatrix}, \ \bra{\beta^{\dag}} = \begin{bmatrix} \beta^{\dag}_{1} & \beta^{\dag}_{2}\end{bmatrix}, \ \bra{\gamma^{\dag}} = \begin{bmatrix} \gamma^{\dag}_{1} & \gamma^{\dag}_{2}\end{bmatrix}, \ \bra{\delta^{\dag}} = \begin{bmatrix} \delta^{\dag}_{1} & \delta^{\dag}_{2}\end{bmatrix}$
+
+\phantom{1em} {\bf 2.} Using above vectors, we can define tensors as below,
+
+\phantom{1000em} $\ket{\tensor{\alpha}{\beta}} = \tensor{\begin{bmatrix} \alpha_{1} \\ \alpha_{2}\end{bmatrix}}{\begin{bmatrix} \beta_{1} \\ \beta_{2}\end{bmatrix}}$ and $\bra{\tensor{\alpha}{\beta}} = \tensor{\begin{bmatrix} \alpha^{\dag}_{1} & \alpha^{\dag}_{2}\end{bmatrix}}{\begin{bmatrix} \beta^{\dag}_{1} & \beta^{\dag}_{2}\end{bmatrix}} = \begin{bmatrix}\alpha^{\dag}_{1}\beta^{\dag}_{1} & \alpha^{\dag}_{1}\beta^{\dag}_{2} & \alpha^{\dag}_{2}\beta^{\dag}_{1} & \alpha^{\dag}_{2}\beta^{\dag}_{2}\end{bmatrix}$
+
+\phantom{1000em} $\ket{\tensor{\gamma}{\delta}} = \tensor{\begin{bmatrix} \gamma_{1} \\ \gamma_{2}\end{bmatrix}}{\begin{bmatrix} \delta_{1} \\ \delta_{2}\end{bmatrix}} = \begin{bmatrix}\gamma_{1}\delta_{1} \\ \gamma_{1}\delta_{2} \\ \gamma_{2}\delta_{1} \\ \gamma_{2}\delta_{2}\end{bmatrix}$
+
+\phantom{1000em} $\braket{\tensor{\alpha}{\beta}}{\tensor{\gamma}{\delta}} = \alpha^{\dag}_{1}\beta^{\dag}_{1}\gamma_{1}\delta_{1} + \alpha^{\dag}_{1}\beta^{\dag}_{2}\gamma_{1}\delta_{2} + \alpha^{\dag}_{2}\beta^{\dag}_{1}\gamma_{2}\delta_{1} + \alpha^{\dag}_{2}\beta^{\dag}_{2}\gamma_{2}\delta_{2}$
+
+\phantom{1em} {\bf 3.} We will derive inner product as below,
+
+\phantom{1000em} $\braket{\alpha}{\gamma} = \begin{bmatrix} \alpha^{\dag}_{1} & \alpha^{\dag}_{2}\end{bmatrix}\begin{bmatrix} \gamma_{1} \\ \gamma_{2}\end{bmatrix} = \alpha^{\dag}_{1}\gamma_{1} + \alpha^{\dag}_{2}\gamma_{2}$ and $\braket{\beta}{\delta} = \begin{bmatrix} \beta^{\dag}_{1} & \beta^{\dag}_{2}\end{bmatrix}\begin{bmatrix} \delta_{1} \\ \delta_{2}\end{bmatrix} = \beta^{\dag}_{1}\delta_{1} + \beta^{\dag}_{2}\delta_{2}$
+
+\phantom{1000em} $\braket{\alpha}{\gamma} \braket{\beta}{\delta} = [\alpha^{\dag}_{1}\gamma_{1} + \alpha^{\dag}_{2}\gamma_{2}][\beta^{\dag}_{1}\delta_{1} + \beta^{\dag}_{2}\delta_{2}] = \alpha^{\dag}_{1}\beta^{\dag}_{1}\gamma_{1}\delta_{1} + \alpha^{\dag}_{1}\beta^{\dag}_{2}\gamma_{1}\delta_{2} + \alpha^{\dag}_{2}\beta^{\dag}_{1}\gamma_{2}\delta_{1} + \alpha^{\dag}_{2}\beta^{\dag}_{2}\gamma_{2}\delta_{2}$
+
+\phantom{1em} {\bf 4.} From the results of point 2 and 3, we can say that,
+
+\phantom{1000em} $\braket{\tensor{\alpha}{\beta}}{\tensor{\gamma}{\delta}} = \braket{\alpha}{\gamma} \braket{\beta}{\delta}$\\
+
+\newpage
+
+{\bf 2.} An $n-ary$ function 
 
 \end{document}
