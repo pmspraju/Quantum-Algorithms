@@ -73,6 +73,18 @@
 
 \newpage
 
+{\bf 7.1.} Prove that negation and Toffoli gate form a complete basis for reversible circuits.
+
+\phantom{1em} {\bf 1.} Any function $f: {0,1}^{n} \rightarrow {0,1}^{m}$ is computable by a boolean circuit. We know that negation $\neg$ and conjunction $\wedge$ are complete basis for boolean circuits, that is, any such function can be built using negation and conjunction.
+
+\phantom{1em} {\bf 2.} By lemma 7.1 and 7.2, we can say that any function $f: {0,1}^{n} \rightarrow {0,1}^{m}$ may be efficiently transformed in to a reversible circuit over the basis $A_{\oplus}$ having the function $(x,y) \rightarrow (x, y, x \oplus y)$
+
+\phantom{1em} {\bf 3.} Toffoli gate $(x, y, c) \rightarrow (x, y, c \oplus (x \wedge y)$ is universal if ancillas, $all set to \ket{1}$ and garbage outputs are allowed. If we include $\neg$ in our basis, such basis can realize any such function with ancillas set to $\ket{0}$
+
+\phantom{1em} {\bf 4.} By above points, we can say that Toffoligate and negation form the complete basis for reversible circuits. 
+
+\newpage
+
 {\bf 1.} Prove that the inner product and the tensor product commute: $\braket{\tensor{\alpha}{\beta}}{\tensor{\gamma}{\delta}} = \braket{\alpha}{\gamma} \braket{\beta}{\delta}$
 
 \phantom{1em} {\bf 1.} We know that $\ket{\varepsilon} = \bra{\varepsilon^{\dag}}$, where $\dag = Conjugate \ transpose$. Let, 
@@ -101,6 +113,17 @@
 
 \newpage
 
-{\bf 2.} An $n-ary$ function 
+{\bf 2.} Find the basis A so that 	every idempotent Boolean function is representable as a circuit over A.
 
+ \phantom{1em} {\bf 1.} An idempotent function is a self inverse function. It should preserve the state of the input 0,1.
+ 
+ \phantom{1em} {\bf 2.} According to Post's Lattice, Clone $P = P_{0}P_{1}$ is the clone of constant-preserving functions. It is the set of idempotent boolean functions.
+ 
+ \phantom{1em} {\bf 3.} One of the bases for above clone is $x ? y : z$\\
+ \phantom{1000em}  $x \ ? \ y : z = y, if \ x \neq 0 \ else = z$. Equivalent to the terenary operator in programming. 
+ 
+ \phantom{1000em}\includegraphics[width=15cm, height=7cm]{I55} 
+ 
+ \phantom{1em} {\bf 4.} Reference - https://en.wikipedia.org/wiki/
+ 
 \end{document}

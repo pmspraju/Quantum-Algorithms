@@ -6,3 +6,4 @@ http://logic.stanford.edu/intrologic/public/index.php
 http://web.cse.ohio-state.edu/~rademacher.10/Sp16_6321/   -- solutions
 https://www.whitman.edu/mathematics/higher_math_online/section03.02.html
 https://people.eecs.berkeley.edu/~vazirani/s09quantum/notes/
+https://www.cs.cmu.edu/~odonnell/quantum15/
