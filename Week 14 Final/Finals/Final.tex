@@ -1,0 +1,215 @@
+\documentclass [12pt]{article}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.25in}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=0.5in,bmargin=1.0in,lmargin=.70in,rmargin=.70in}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri,calc,matrix}
+\usepackage{slashbox}
+\usepackage{listings}
+\usepackage{ dsfont }
+\usepackage{ upgreek }
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+
+\newcommand{\ket}[1]{| {#1} \rangle}
+\newcommand{\bra}[1]{\langle {#1} |}
+\newcommand{\braket}[2]{\langle #1 \ | \ #2 \rangle}
+\newcommand{\qp}[2]{\langle #1 \ | \ #2 \ | \ #1 \rangle}
+\newcommand{\tensor}[2]{ #1 \otimes  #2 }
+\newcommand{\iz}[1]{\mathds{#1}^{n}}
+\newcommand{\md}[1]{|#1|}
+\newcommand{\suml}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\im}[1]{\mathds{#1}/m_{i}\mathds{#1}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\DeclareMathOperator{\Cspan}{ \CC-span }
+
+\title{Finals}
+\author{Madhu Peduri}
+\date{05/11/2021}
+
+\begin{document}
+\section*{Finals}
+
+{\bf 2.} Show that $[D] * [E] = [D \otimes E]$
+
+\phantom{1em} {\bf 2.1.} We have below information,
+
+\phantom{1000em} $D\ket{v_{1}} = \ket{w_{1}} + \ket{w_{2}} + \ket{w_{3}} \Rightarrow (D\ket{v_{1}})_{w} = [1 \ 1 \ 1]^{T}$\\
+\phantom{1000em} $D\ket{v_{2}} = 2\ket{w_{2}} - \ket{w_{3}} \Rightarrow (D\ket{v_{2}})_{w} = [0 \ 2 \ -1]^{T}$
+
+\phantom{1000em} $E\ket{x_{1}} = \ket{y_{1}} - \ket{y_{2}} \Rightarrow (E\ket{x_{1}})_{y} = [1 \ -1]^{T}$\\
+\phantom{1000em} $E\ket{x_{2}} = 2\ket{y_{2}} \Rightarrow (E\ket{x_{2}})_{y} = [0 \ 2]^{T}$\\
+\phantom{1000em} $E\ket{x_{3}} = \ket{y_{1}} + \ket{y_{2}} \Rightarrow (E\ket{x_{3}})_{y} = [1 \ 1]^{T}$
+
+\phantom{1em} {\bf 2.2.} We know that,
+
+\phantom{1000em} $D : V \rightarrow W = [(D\ket{v_{1}})_{w} \quad (D\ket{v_{2}})_{w}]$\\
+\phantom{1000em} $E : X \rightarrow Y = [(E\ket{x_{1}})_{y} \quad (E\ket{x_{2}})_{y} \quad (E\ket{x_{3}})_{y}]$
+
+\phantom{1000em} 
+$ D_{V \rightarrow W} = 
+\begin{bmatrix} 
+	1 & 0 \\ 
+	1 & 2 \\
+	1 & -1
+\end{bmatrix}
+E_{X \rightarrow Y} = 
+\begin{bmatrix} 
+	1 & 0 & 1\\ 
+   -1 & 2 & 1
+\end{bmatrix}$
+
+\phantom{1em} {\bf 2.3.} $[D] * [E] = 
+\begin{bmatrix} 
+	1 & 0 \\ 
+	1 & 2 \\
+	1 & -1
+\end{bmatrix}
+*
+\begin{bmatrix} 
+	1 & 0 & 1\\ 
+   -1 & 2 & 1
+\end{bmatrix}
+= 
+\begin{bmatrix} 
+	1E & 0E \\ 
+	1E & 2E \\
+	1E & -1E
+\end{bmatrix}$\\
+\phantom{1000em} $ = 
+\begin{bmatrix} 
+	1 & 0 & 1 & 0 & 0 & 0\\ 
+   -1 & 2 & 1 & 0 & 0 & 0\\
+    1 & 0 & 1 & 2 & 0 & 2\\
+   -1 & 2 & 1 & -2 & 4 & 2\\
+    1 & 0 & 1 & -1 & 0 & -1\\
+    -1 & 2 & 1 & 1 & -2 & -1
+\end{bmatrix}$
+
+\phantom{1em} {\bf 2.4.} We know that $D \otimes E$ is the operator works on $V \otimes X$, $W \otimes Y$\\
+\phantom{1000em} $\Rightarrow (D \otimes E) : V \otimes X \rightarrow W \otimes Y$ with dimension $= dim(D \otimes E)$\\
+\phantom{1000em} $\Rightarrow dim(D \otimes E) = dim(V \otimes X) \times dim(W \otimes Y)$\\ 
+\phantom{1000em} $= (2*3) \times (3*2) = 6 \times 6$
+
+\phantom{1000em} Suppose $[D \otimes E] = (D \otimes E)\ket{V \otimes X}= \begin{bmatrix} C_{1} & C_{2} & C_{3} & C_{4} & C_{5} & C_{6} \end{bmatrix}$, then
+
+\phantom{1000em} $C_{1} = (D \otimes E)(v_{1} \otimes x_{1}) = (Dv_{1}) \otimes (Ex_{1}) = (w_{1}+w_{2}+w_{3}) \otimes (y_{1}-y_{2})$\\
+\phantom{1000em} $= 1(w_{1} \otimes y_{1}) -1(w_{1} \otimes y_{2}) +1(w_{2} \otimes y_{1}) -1(w_{2} \otimes y_{2}) +1(w_{3} \otimes y_{1}) -1(w_{3} \otimes y_{2})$\\
+\phantom{1000em} $= [1 \ -1 \ 1 \ -1 \ 1 \ -1]^{T}$
+
+\phantom{1000em} $C_{2} = (D \otimes E)(v_{1} \otimes x_{2}) = (Dv_{1}) \otimes (Ex_{2}) = (w_{1}+w_{2}+w_{3}) \otimes (2y_{2})$\\
+\phantom{1000em} $= 0(w_{1} \otimes y_{1}) +2(w_{1} \otimes y_{2}) +0(w_{2} \otimes y_{1}) +2(w_{2} \otimes y_{2}) +0(w_{3} \otimes y_{1}) +2(w_{3} \otimes y_{2})$\\
+\phantom{1000em} $= [0 \ 2 \ 0 \ 2 \ 0 \ 2]^{T}$
+
+\phantom{1000em} $C_{3} = (D \otimes E)(v_{1} \otimes x_{3}) = (Dv_{1}) \otimes (Ex_{3}) = (w_{1}+w_{2}+w_{3}) \otimes (y_{1}+y_{2})$\\
+\phantom{1000em} $= 1(w_{1} \otimes y_{1}) +1(w_{1} \otimes y_{2}) +1(w_{2} \otimes y_{1}) +1(w_{2} \otimes y_{2}) +1(w_{3} \otimes y_{1}) +1(w_{3} \otimes y_{2})$\\
+\phantom{1000em} $= [1 \ 1 \ 1 \ 1 \ 1 \ 1]^{T}$
+
+\phantom{1000em} $C_{4} = (D \otimes E)(v_{2} \otimes x_{1}) = (Dv_{2}) \otimes (Ex_{1}) = (2w_{2}-w_{3}) \otimes (y_{1}-y_{2})$\\
+\phantom{1000em} $= 0(w_{1} \otimes y_{1}) -0(w_{1} \otimes y_{2}) +2(w_{2} \otimes y_{1}) -2(w_{2} \otimes y_{2}) -1(w_{3} \otimes y_{1}) +1(w_{3} \otimes y_{2})$\\
+\phantom{1000em} $= [0 \ 0 \ 2 \ -2 \ -1 \ 1]^{T}$
+
+\phantom{1000em} $C_{5} = (D \otimes E)(v_{2} \otimes x_{2}) = (Dv_{2}) \otimes (Ex_{2}) = (2w_{2}-w_{3}) \otimes (2y_{2})$\\
+\phantom{1000em} $= 0(w_{1} \otimes y_{1}) -0(w_{1} \otimes y_{2}) +0(w_{2} \otimes y_{1}) +4(w_{2} \otimes y_{2}) -0(w_{3} \otimes y_{1}) -2(w_{3} \otimes y_{2})$\\
+\phantom{1000em} $= [0 \ 0 \ 0 \ 4 \ 0 \ -2]^{T}$
+
+\phantom{1000em} $C_{6} = (D \otimes E)(v_{2} \otimes x_{3}) = (Dv_{2}) \otimes (Ex_{3}) = (2w_{2}-w_{3}) \otimes (y_{1}+y_{2})$\\
+\phantom{1000em} $= 0(w_{1} \otimes y_{1}) -0(w_{1} \otimes y_{2}) +2(w_{2} \otimes y_{1}) +2(w_{2} \otimes y_{2}) -1(w_{3} \otimes y_{1}) -1(w_{3} \otimes y_{2})$\\
+\phantom{1000em} $= [0 \ 0 \ 2 \ -2 \ -1 \ -1]^{T}$
+
+\phantom{1000em} $\Rightarrow [D \otimes E] = \begin{bmatrix} C_{1} & C_{2} & C_{3} & C_{4} & C_{5} & C_{6} \end{bmatrix} = 
+\begin{bmatrix} 
+	1 & 0 & 1 & 0 & 0 & 0\\ 
+   -1 & 2 & 1 & 0 & 0 & 0\\
+    1 & 0 & 1 & 2 & 0 & 2\\
+   -1 & 2 & 1 & -2 & 4 & 2\\
+    1 & 0 & 1 & -1 & 0 & -1\\
+    -1 & 2 & 1 & 1 & -2 & -1
+\end{bmatrix}
+$
+
+\phantom{1em} {\bf 2.5.} From points 3 and 4,\\
+\phantom{1000em} $[D] * [E] = [D \otimes E]$
+
+\newpage
+
+{\bf 1.} Show that $\mathcal{F}_{\mathds{G}} = \bigotimes\limits_{i=1}^{k}\mathcal{F}_{\im{Z}}$
+
+\phantom{1em} {\bf 1.1.} We have a finite abelian group $\mathds{G} = \Uppi_{i=1}^{k}\im{Z}$\\
+\phantom{1000em} $\Rightarrow \mathds{G} = \mathds{Z}_{p_{1}} \times \mathds{Z}_{p_{2}} \times \dots \times \mathds{Z}_{p_{k}}$ where, $\md{G} = p_{1}p_{2} \dots p_{k}$
+
+\phantom{1000em} We can denote the elments of the group $g \in \mathds{G}$ as a tuple of $k$ elements\\
+\phantom{1000em} $g = (g_{1}, \dots , g_{k})$ where $g_{j} \in \mathds{Z}_{p_{j}}$
+
+\phantom{1em} {\bf 1.2.} To define the Fourier transform, we consider the characters of G.\\
+\phantom{1000em} Let $\mathcal{X} : \mathds{G} \rightarrow \mathds{C}^{*}$ be a character. \\
+\phantom{1000em} Let $\beta_{1} = (1,0, \dots, 0) \in \mathds{G}, \beta_{2} = (0,1, \dots, 0) \in \mathds{G}, \dots ,\beta_{k} = (0,0, \dots, 1) \in \mathds{G}$\\
+\phantom{1000em} Then for any element $g = (g_{1}, \dots , g_{k})$ we have \\
+\phantom{1000em} $ \mathcal{X}(g) = \mathcal{X}(\suml{j=1}{k}g_{j}\beta_{j}) = \Uppi_{j=1}^{k}\mathcal{X}(\beta_{j})^{g_{j}}$ 
+
+\phantom{1em} {\bf 1.3.} From above point we know that, $\mathcal{X}(\beta_{j})$ is determined by the values of $\beta_{j}$\\
+\phantom{1000em} We also know that the set of characters forms orthogonal basis, \\
+\phantom{1000em} $\mathcal{X}(\beta_{j})^{g_{j}} = \mathcal{X}(1)^{g_{j}}$\\
+\phantom{1000em} $\Rightarrow \mathcal{X}(\beta_{j})$ can be dertermined by N-th root of unity\\
+\phantom{1000em} $\mathcal{X}(\beta_{j}) = \omega_{p_{k}}^{h_{j}}$ for some interger $h_{j}$\\
+\phantom{1000em} $\Rightarrow$ a given character from $\mathcal{X}$ can be determined by the tuple $h = (h_{1}, \dots , h_{k})$\\
+\phantom{1000em} $\mathcal{X}_{g}(h) = \Uppi_{j=1}^{k}\omega_{p_{k}}^{g_{j}h_{j}}$
+
+\phantom{1000em} We know that $g = (g_{1}, \dots , g_{k})$\\
+\phantom{1000em} $\Rightarrow \suml{g \in \mathds{G}}{}\mathcal{X}_{g}(h) = \suml{g_{1} \in \mathds{Z_{1}}}{} \dots \suml{g_{k} \in \mathds{Z_{k}}}{} \Uppi_{j=1}^{k}\omega_{p_{k}}^{g_{j}h_{j}}$\\
+\phantom{1000em} $\Rightarrow \suml{g \in \mathds{G}}{}\mathcal{X}_{g}(h) = (\suml{g_{1} \in \mathds{Z_{1}}}{} \omega_{p_{1}}^{g_{1}h_{1}}) \dots (\suml{g_{k} \in \mathds{Z_{k}}}{} \omega_{p_{k}}^{g_{k}h_{k}})$
+
+\phantom{1em} {\bf 1.4.} We know that Quantum fourier transform for a given group $\mathds{G}$ is defined as,\\
+\phantom{1000em} $\mathcal{F}_{\mathds{G}} = \dfrac{1}{\sqrt{\md{\mathds{G}}}}\suml{g,h \in G}{}\mu(g,h) \ket{g}\bra{h}$\\
+\phantom{1000em} where $\mu(g,h) = \Uppi_{i=1}^{k}\omega_{m_{i}}^{g_{i}h_{i}}$, $\omega_{m_{i}} = exp(i2\uppi/m_{i})$
+
+\phantom{1000em} When the group $\mathds{G}$ is a finite abelian group $\mathds{G} = \mathds{Z}_{p_{1}} \times \mathds{Z}_{p_{2}} \times \dots \times \mathds{Z}_{p_{k}}$, then\\
+\phantom{1000em} Quantum fourier transform $\mathcal{F}_{\im{Z}}$ ,\\
+\phantom{1000em} $\mathcal{F}_{\im{Z}} = \dfrac{1}{\sqrt{\md{\mathds{G}}}}\suml{g,h \in G}{}\mathcal{X}(g,h) \ket{g_{1}, \dots , g_{k}}\bra{h_{1}, \dots , h_{k}}$
+
+\phantom{1000em} from above points, we can rewrite the QFT for finite abeilian groups as,\\
+\phantom{1000em} $\mathcal{F}_{\im{Z}} =  \dfrac{1}{\sqrt{\md{p_{1}p_{2} \dots p_{k}}}} (\suml{g_{1} \in \mathds{Z_{1}}}{} \omega_{p_{1}}^{g_{1}h_{1}}) \dots (\suml{g_{k} \in \mathds{Z_{k}}}{} \omega_{p_{k}}^{g_{k}h_{k}})) \tensor{\ket{g_{1}}}{\ket{g_{2}}} \dots \otimes \ket{g_{k}}\tensor{\bra{h_{1}}}{\bra{h_{2}}} \dots \otimes \bra{h_{k}}$\\
+\phantom{1000em} $\mathcal{F}_{\im{Z}} =(\dfrac{1}{\sqrt{\md{p_{1}}}}\suml{g_{1} \in \mathds{Z_{1}}}{} \omega_{p_{1}}^{g_{1}h_{1}})\ket{g_{1}}\bra{h_{1}}) \otimes (\dfrac{1}{\sqrt{\md{p_{2}}}}\suml{g_{2} \in \mathds{Z_{2}}}{} \omega_{p_{2}}^{g_{2}h_{2}})\ket{g_{2}}\bra{h_{2}}) \otimes \dots \otimes (\dfrac{1}{\sqrt{\md{p_{k}}}}\suml{g_{k} \in \mathds{Z_{k}}}{} \omega_{p_{k}}^{g_{k}h_{k}})\ket{g_{k}}\bra{h_{k}})$
+
+\phantom{1em} {\bf 1.5.} Thus, from above points, we can write \\ 
+\phantom{1000em} $\mathcal{F}_{\im{Z}} = \mathcal{F}_{\mathds{Z}/m_{1}\mathds{Z}} \otimes \mathcal{F}_{\mathds{Z}/m_{2}\mathds{Z}} \otimes \dots \otimes \mathcal{F}_{\mathds{Z}/m_{k}\mathds{Z}}$\\
+\phantom{1000em} $\Rightarrow \mathcal{F}_{\mathds{G}} = \bigotimes\limits_{i=1}^{k}\mathcal{F}_{\im{Z}}$
+
+\quad \\ \quad \\ \quad \\
+
+\textbf{Name:} \underline{Madhu Peduri}
+
+''I pledge on my honor that I have neither given nor received unauthorized aid on this assignment."
+
+\textbf{Signature:} \underline{Madhu Peduri}
+
+\end{document}

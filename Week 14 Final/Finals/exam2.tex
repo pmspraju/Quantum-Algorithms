@@ -1,0 +1,257 @@
+\documentclass[oneside]{amsart}  % {{{1
+\usepackage{amssymb, mathtools, enumitem, booktabs, float, caption, tikz}
+\usepackage[final]{hyperref, microtype}
+
+% structure symbols
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\m}[1]{\mathbb{#1}}      % models
+\newcommand{\alg}[1]{\m{#1}}         % algebras
+\newcommand{\rel}[1]{\mathbf{#1}}    % relational structures
+\newcommand{\cl}[1]{\mathcal{#1}}    % classes
+\newcommand{\Comp}[1]{\textsf{#1}}   % complexity classes
+
+% theorems and similar environments
+\theoremstyle{plain}
+  \newtheorem{thm}{Theorem}           \newtheorem*{thm*}{Theorem}
+  \newtheorem{claim}{Claim}[thm]      \newtheorem*{claim*}{Claim}
+  \newtheorem{conj}[thm]{Conjecture}  \newtheorem*{conj*}{Conjecture}
+  \newtheorem{cor}[thm]{Corollary}    \newtheorem*{cor*}{Corollary}
+  \newtheorem{lem}[thm]{Lemma}        \newtheorem*{lem*}{Lemma}
+  \newtheorem{prop}[thm]{Proposition} \newtheorem*{prop*}{Proposition}
+\theoremstyle{definition}
+  \newtheorem{defn}[thm]{Definition} \newtheorem*{defn*}{Definition}
+  \newtheorem{ex}[thm]{Example}      \newtheorem*{ex*}{Example}
+\theoremstyle{remark}
+  \newtheorem{rk}[thm]{Remark}  \newtheorem*{rk*}{Remark}
+\newcommand{\Case}[1]{\smallskip \textbf{Case #1:}}
+\newenvironment{claimproof}
+  {
+    \begin{proof}[Proof of claim]
+    \renewcommand{\qedsymbol}{\ensuremath{\circ}}
+  } {
+    \end{proof}
+  }
+
+% custom commands
+\DeclareMathOperator{\Cg}{Cg}
+\DeclareMathOperator{\Clo}{Clo}
+\DeclareMathOperator{\Con}{Con}
+\DeclareMathOperator{\Inv}{Rel}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sg}{Sg}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\bmat}[1]{ \begin{bmatrix} #1 \end{bmatrix} }
+\newcommand{\Bmat}[1]{ \begin{Bmatrix} #1 \end{Bmatrix} }
+\newcommand{\pmat}[1]{ \begin{pmatrix} #1 \end{pmatrix} }
+\newcommand{\mat}[1]{ \begin{matrix} #1 \end{matrix} }
+\newcommand{\ds}[1]{ \displaystyle{#1} }
+\newcommand{\stack}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\Proofitem}[1]{\smallskip \textbf{#1:}}
+
+% tikz
+\usetikzlibrary{calc, matrix, positioning}
+\newcommand{\TikzCenterNode}{\node (center) at ($(current bounding box.north east)!0.5!(current bounding box.south west)$) {\phantom{$\cdot$}};}
+
+% misc
+\numberwithin{equation}{section}  % number equations within sections
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\todo}[1]{\noindent\textbf{TODO: #1}}
+\renewcommand*{\arraystretch}{1.25} 
+\setlist[enumerate]{itemsep=0.5em}
+\setlist[itemize]{itemsep=0.5em}
+
+% homework/exam specific
+\usepackage[margin=1.5in, top=1in, bottom=1in]{geometry}
+\usepackage{environ}
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{wide=0pt, parsep=0.5em, listparindent=\parindent, font=\bfseries}
+\setlist[questions,1]{label=\arabic*., itemsep=2\parsep, topsep=\itemsep+\parsep}
+\setlist[questions,2]{labelindent=\parindent, label=(\roman*), itemsep=\parsep}
+\setlist[questions,3]{labelindent=2\parindent, label=(\alph*)}
+\newcommand{\SolnItem}[1]{\smallskip\indent\textrm{\bf#1:}}
+\newenvironment{proofpart}[1] { \begin{proof}[\SolnItem{#1} Proof.] } { \end{proof} }
+\newif\ifsolutions
+\NewEnviron{solution}
+  {
+    \ifsolutions
+      \bigskip \noindent \textbf{Solution:} \BODY 
+    \fi
+  }
+  { }
+
+% document specific stuff
+% quantum
+\DeclareMathOperator{\Cspan}{ \CC-span }
+\DeclareMathOperator{\Tr}{ Tr }
+\newcommand{\B}{ \mathfrak{B} }
+\newcommand{\bra}[1]{ \left< #1 \right| }
+\newcommand{\ket}[1]{ \left| #1 \right> }
+\newcommand{\bracket}[2]{ \left< #1 \mid #2 \right> }
+\tikzset{gate-c/.style = {draw, circle, inner sep=0.25em}}
+\tikzset{gate-r/.style = {draw, rounded corners, rectangle}}
+\tikzset{control/.style = {draw, fill, circle, inner sep=0.1em}}
+\tikzset{circuit/.style = {matrix of math nodes, cells={anchor=center}, column 1/.style={anchor=east}}}
+\newcommand{\tikzMeasure}{
+  \begin{tikzpicture}[scale=0.2, baseline=0pt]
+    \draw (0,0) arc (180-20:20:1);
+    \draw[->] (current bounding box.north|-current bounding box.south) -- ++(60:1.5);
+  \end{tikzpicture} }
+
+% computation
+%\usepackage[final]{minted}
+%\usemintedstyle{bw, mathescape, escapeinside=;;}
+\renewcommand{\O}{\mathcal{O}}
+\DeclareMathOperator{\poly}{poly}
+%----------------------------------------------------------------------------}}}1
+
+\begin{document}  %\solutionstrue
+% title matter {{{1
+\title[Quantum Algorithms, Final Exam]{Quantum Algorithms \\ Final Exam}
+\author{Prof.~Matthew Moore}
+\maketitle
+
+\thispagestyle{empty} \setcounter{page}{0}
+
+\vspace{-0.7em} \begin{center}
+  \sc Due: 2021-05-11 at 10:00
+\end{center}
+
+\vspace{4em}
+
+\noindent \textbf{Name:} \underline{\hspace{20em}}
+
+\vspace{2em}
+
+\noindent \textbf{Instructions} % {{{
+\begin{itemize}[itemsep=0.5em, topsep=\itemsep]
+  \item You may make use of any non-human assistance --- any book, the web
+    (but do not ask for help online), etc. Solutions must be self-contained.
+
+  \item Solutions given with little or no justification may receive little
+    or no credit.
+
+  \item Solutions will be graded based on correctness, quality, and
+    presentation. Turn in something that you are proud of.
+
+  \item There are 3 problems. \textbf{Submit only 2 for grading.}
+\end{itemize}
+%----------------------------------------------------------------------------}}}
+
+\vspace{2em}
+
+\noindent ``I pledge on my honor that I have neither given nor received
+unauthorized aid on this assignment.''
+
+\vspace{4em}
+
+\noindent \textbf{Signature:} \underline{\hspace{20em}}
+%----------------------------------------------------------------------------}}}1
+
+\newpage \phantom{.} \vspace{-2em}
+
+\begin{questions}
+% QFT for finite Abelian groups   {{{1
+% ID: tae6Ukof
+\item Let $\m{G}$ be a finite Abelian group such that
+\[
+  \m{G}
+  \cong \prod_{i=1}^k \ZZ/m_i\ZZ
+\]
+by the Fundamental Theorem of Finitely Generated Abelian Groups. Regard elements
+$g\in G$ as tuples $g = (g_i) \in \prod \ZZ/m_i\ZZ$. Recall that the Quantum
+Fourier Transform for $\alg{G}$ was defined
+\[
+  \cl{F}_{\alg{G}}
+  \coloneqq \frac{1}{\sqrt{|\alg{G}|}} \sum_{g,h\in G} \mu(g,h) \ket{g}\bra{h}
+\]
+where
+\[
+  \mu(g,h) \coloneqq \prod_{i=1}^k \omega_{m_i}^{g_i h_i},
+  \hspace{6em}
+  \omega_{m_i} \coloneqq \exp(2\pi i / m_i).
+\]
+Show that $\ds{ \cl{F}_{\alg{G}} = \bigotimes_{i=1}^k \cl{F}_{\ZZ/m_i\ZZ} }$.
+%----------------------------------------------------------------------------}}}1
+
+\newpage \phantom{.} \vspace{-2em}
+
+% Kronecker product, tensors   {{{1
+% ID: too3Maev
+\item Recall that the Kronecker product of \emph{matrices} $A$ and $B$ is
+defined
+\[
+  A * B
+  \coloneqq 
+  \pmat{ a_{11} B & \cdots & a_{1n} B \\
+         \vdots   &        & \vdots \\
+         a_{m1} B & \cdots & a_{mn} B },
+  \hspace{6em}
+  A = (a_{ij}),
+\]
+and that given a \emph{linear operator} $C: \alg{T} \to \alg{U}$, we denote the
+matrix of $C$ relative to some specified ordered bases for $\alg{T}$ and
+$\alg{U}$ as $[C]$.
+
+\smallskip
+
+Let $\alg{V}, \alg{W}, \alg{X}, \alg{Y}$ be vector spaces with respective
+ordered bases
+\begin{align*}
+  \cl{V} &= \big\{ \ket{v_1}, \ket{v_2} \big\},
+    & \cl{W} &= \big\{ \ket{w_1}, \ket{w_2}, \ket{w_3} \big\}, \\
+  \cl{X} &= \big\{ \ket{x_1}, \ket{x_2}, \ket{x_3} \big\},
+    & \cl{Y} &= \big\{ \ket{y_1}, \ket{y_2} \big\}.
+\end{align*}
+Define linear operators $D: \alg{V}\to \alg{W}$ and $E: \alg{X}\to \alg{Y}$ by
+\begin{align*}
+  D\ket{v_1} &= \ket{w_1} + \ket{w_2} + \ket{w_3},
+    & E\ket{x_1} &= \ket{y_1} - \ket{y_2}, \\
+  D\ket{v_2} &= 2\ket{w_2} - \ket{w_3},
+    & E\ket{x_2} &= 2\ket{y_2}, \\
+  && E\ket{x_3} &= \ket{y_1} + \ket{y_2}.
+\end{align*}
+Show that $[D]*[E] = [D\otimes E]$, where the bases for $\alg{V}\otimes \alg{X}$
+and $\alg{W}\otimes \alg{Y}$ are the usual lexicographically ordered bases. You
+may do this by direct calculation if you wish.
+%----------------------------------------------------------------------------}}}1
+
+\newpage \phantom{.} \vspace{-2em}
+
+% discrete log problem   {{{1
+% ID: ai7ChahJ
+\item Given a group $\alg{G}$, recall that the discrete logarithm problem takes
+as input elements $a, b\in G$ such that $b^s = a$, and outputs the number $s$.
+Recall that the quantum solution to the discrete logarithm problem involves
+running the eigenvalue estimation circuit in series using the operators $U_b$
+and $U_a^{\dagger}$.
+
+\begin{questions}
+  \item Show that the state in the circuit before passing through the two
+  inverse Quantum Fourier Transform blocks is proportional to
+  \[
+    \sum_{x,y\in \{0,1\}^n} \ket{x, y, b^x a^{-y}}.
+  \]
+
+  \item Carefully show that the state after passing through the two inverse
+  Quantum Fourier Transform blocks but before measurement is proportional to
+  \[
+    \sum_{\stack{z,w\in \{0,1\}^n}{sw+z=0}} \ket{z,w} 
+      \otimes \sum_{k=1}^m \exp(-2\pi i (kw)/2^n) \ket{b^k},
+  \]
+  where $m$ is the period/order of $b$ in $\alg{G}$. [\emph{Hint: use $b^s =
+  a$}.]
+
+  \item Conclude that measuring the top two registers of the circuit produces
+  pairs $\ket{u, v}$ such that $b^u a^{-v} = 1$. Explain how to use such pairs
+  to find $s$.
+\end{questions}
+%----------------------------------------------------------------------------}}}1
+\end{questions}
+\end{document}

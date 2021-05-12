@@ -12,3 +12,4 @@ https://homepages.cwi.nl/~rdewolf/qcnotesv2.pdf
 http://www.physics.udel.edu/~msafrono/650/
 https://cryptome.org/qc-grover.htm
 https://inst.eecs.berkeley.edu/~cs191/fa14/lectures/
+http://theory.caltech.edu/~preskill/ph229/#lecture

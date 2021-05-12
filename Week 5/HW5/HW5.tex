@@ -1,0 +1,146 @@
+\documentclass [12pt]{article}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.25in}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=0.5in,bmargin=1.0in,lmargin=.70in,rmargin=.70in}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri,calc,matrix}
+\usepackage{slashbox}
+\usepackage{listings}
+\usepackage{ dsfont }
+\usepackage{ upgreek }
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\DeclareMathOperator{\Cspan}{ \CC-span }
+
+\title{Home Work 5}
+\author{Madhu Peduri}
+\date{03/08/2021}
+
+\begin{document}
+\section*{Homework 5}
+
+{\bf 1.1} Show that $C-span(C) = V \times S$ but that C is not always a basis for $V \times S$.
+
+\phantom{1em} {\bf 1.} We have coordinates of the vectors as $V=(v_{1}, v_{2}), S=(s_{1}, s_{2})$.  We can write bases as $b_{v} =\{b_{v1},b_{v2}\}, b_{s}=\{b_{s1},b_{s2}\}$ respectively. 
+
+\phantom{1em} {\bf 2.} We have coordinates of the vector space $V \times S = \{ v_{1} + v_{2},  s_{1} + s_{2}\}$. Now we have the set $C = \{b_{v}, b_{s} \}$ and C-span(C) will have the dinstinct combinations which are both linearly dependent and independent. If we consider a set where $b_{v1} = - b_{s1} \ and \ b_{v2} = - b_{s2}$, then such combination would make the vector space $V \times S = 0$. As we can have linearly dependent combinations, C-Span(C) cannot be basis for vector space $V \times S$ always. 
+
+{\bf 1.2} Prove that $B_{v \times s} = \{(b_{v},0), (0,b_{s}) \ | \ b_{v} \in B_{v} \ and \ b_{s} \in B_{s} \}$ is a basis for $ V \times S$. What is the dimension of $V \times S$.
+
+\phantom{1em} {\bf 1.} A set, b , is the basis of a vector space, V, if b spans V and is linearly independent. 
+
+\phantom{1em} {\bf 2.} If $B_{v \times s}$ is the basis of $V \times S$ then, \\
+\phantom{1000em} $V \times S = \sum \uplambda_{v}(b_{v} + 0),   \sum \uplambda_{s}(0 + b_{s})$\\
+\phantom{1000em} $V \times S = \sum \uplambda_{v}b_{v},   \sum \uplambda_{s}b_{s}$\\
+\phantom{1000em} $V \times S = \sum \uplambda_{v}b_{v},   \sum \uplambda_{s}b_{s}$\\
+\phantom{1000em} $V \times S = (v,s) = C-span(B_{v \times s}) $
+
+\phantom{1em} {\bf 3.} A set of vectors are linearly independent if they are not dependent, that is, one of  them cannot be derived by addition or scalar multiplication of others.\\
+\phantom{1000em} $\sum \uplambda_{v}(b_{v} + 0) =   \sum \uplambda_{s}(0 + b_{s})$ only if $\uplambda_{v} = \uplambda_{s} = 0$\\
+\phantom{1000em} This states that $B_{v \times s}$ is linearly independent.
+
+\phantom{1em} {\bf 4.} From above points, we can say $B_{v \times s}$ is the basis for the vector space $V \times S$.  Size of the basis is  equal to the dimension of the vector space.\\
+\phantom{1000em} $dim(V \times S) = 2$
+
+{\bf 1.3} Find the matrix representation for $(R \times T)_{B_{A} \rightarrow B_{v \times s}}$
+
+\phantom{1em} {\bf 1.} We have a linear mapping $R : A \rightarrow V$ where matrix R transform the ordered base $B_{A} \rightarrow B_{V}$ \\
+\phantom{1000em} $ \begin{bmatrix} v_{1} \\ v_{2} \\ v_{3} \end{bmatrix} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}  \begin{bmatrix} a_{1} \\ a_{2} \end{bmatrix} =  \begin{bmatrix} a_{1} + 2a_{2}\\ 3a_{1} + 4a_{2} \\ 5a_{1} + 6a_{2} \end{bmatrix}$
+
+\phantom{1em} {\bf 2.} We have a linear mapping $T : A \rightarrow S$ where matrix R transform the ordered base $B_{A} \rightarrow B_{S}$ \\
+\phantom{1000em} $ \begin{bmatrix} s_{1} \\ s_{2} \end{bmatrix} = \begin{bmatrix} -1 & 2 \\ 3 & -2 \end{bmatrix}  \begin{bmatrix} a_{1} \\ a_{2} \end{bmatrix} =  \begin{bmatrix} -a_{1} + 2a_{2} \\ 3a_{1} - 2a_{2} \end{bmatrix}$
+
+\phantom{1em} {\bf 3.} We have a linear mapping $R \times T : A \rightarrow (V \times S)$ where matrix $(R \times T)$ transform the ordered base $B_{A} \rightarrow B_{V \times S}$ \\
+\phantom{1000em} $B_{V \times S}$ is the lexicographic order of $B_{V} \ and \ B_{S} = \{ v_{1}, v_{2}, v_{3}, s_{1}, s_{2}\}$ \\
+\phantom{1000em} $ \begin{bmatrix} v_{1} \\ v_{2} \\ v_{3} \\ s_{1} \\ s_{2} \end{bmatrix} = \begin{bmatrix} a_{1} + 2a_{2}\\ 3a_{1} + 4a_{2} \\ 5a_{1} + 6a_{2} \\ -a_{1} + 2a_{2} \\ 3a_{1} - 2a_{2} \end{bmatrix} =  \begin{bmatrix}  1 & 2 \\ 3 & 4 \\ 5 & 6 \\ -1 & 2 \\ 3 & -2\end{bmatrix} \begin{bmatrix} a_{1} \\ a_{2} \end{bmatrix}$
+
+\phantom{1em} {\bf 4.} From above point we can derive the matrix $(R \times T)_{B_{A} \rightarrow B_{V \times S}} = \begin{bmatrix}  1 & 2 \\ 3 & 4 \\ 5 & 6 \\ -1 & 2 \\ 3 & -2\end{bmatrix}$
+
+{\bf 2.1} Let $T : A \rightarrow B$ is a linear transformation between vector spaces with ordered bases $B_{A} = \{|1\rangle, |2\rangle, |3\rangle \}$ and $B_{B} = \{|1\rangle, |2\rangle\}$
+
+\phantom{1em} {\bf 1.} Let $i \in B_{B} \ and \ j \in B_{A}$, then a matrix representation of T is obtained by applying T to every vector in the basis of A and expressing the result as a linear combination of basis vectors of B.\\
+\phantom{1000em} $T(|j \rangle) = \sum\limits_{j=1}^2 a_{ij} |i \rangle$
+
+\phantom{1em} {\bf 2.}  Using above notation, we can write the vectors of A in terms of B as below\\
+\phantom{1000em} $T(|1\rangle) = 9|1\rangle - 4|2\rangle$\\
+\phantom{1000em} $T(|2\rangle) = 6|1\rangle - 8|2\rangle$\\
+\phantom{1000em} $T(|3\rangle) = -3|1\rangle + 8|2\rangle$
+
+\phantom{1em} {\bf 3.} From the below summation $a_{ij}$ are entries of $m \times n$ matrix of of our linear transformation function A. \\
+\phantom{1000em} $T = \sum\limits_{i=1}^m\sum\limits_{j=1}^n a_{ij} |i \rangle \langle j| $ where $m=3, \ n=2$
+
+\phantom{1em} {\bf 4.} We write the equations in point 2 as per the summation in point 3, we get below\\
+\phantom{1000em} $= (9|1\rangle - 4|2\rangle)\langle 1| + (6|1\rangle - 8|2\rangle)\langle 2| + (-3|1\rangle + 8|2\rangle)\langle 3|$\\
+\phantom{1000em} $= 9|1 \rangle \langle 1| - 4|2 \rangle \langle 1| +6|1 \rangle \langle 2| -8|2 \rangle \langle 2| -3|1 \rangle \langle 3| +8|2 \rangle \langle 3|$
+
+\phantom{1em} {\bf 5.} If we gather the $a_{ij}$ from above equation in the order of $\{(1,1),(1,2),(1,3),(2,1),(2,2),(2,3)\}$, we get our matrix which is equal to the given one.\\
+\phantom{1000em} $\begin{bmatrix} 9 & 6 & -3 \\ -4 & -8 & 8\end{bmatrix}$
+
+\newpage
+
+{\bf 2.2} From the equation in point 2.1.3, we can verify that the matrix is the product of T by $|v_{j}$ is equal to $T(v_{j})$. This is because of the property  that matrix multiplication is associative.\\
+\phantom{1000em} $(|j \rangle \langle i|)|v_{k} \rangle = \langle i|v_{k}|j \rangle$
+
+{\bf 2.3} By definition of a linear transformation, which was used in 2.1.3, a function $R : A \rightarrow B$ which can be represented as a matrix R of the below form is a linear transformation.\\
+\phantom{1000em} $R = \sum\limits_{i \in B_{B}}^m\sum\limits_{j \in B_{A}}^n b_{ij} |i \rangle \langle j| $ where $m=dim(A), \ n=dim(B)$
+
+{\bf 3.1} $B_{v \otimes s} = \{ b_{v} \otimes b_{s}\} \ | \ b_{v} \in B_{v} \ and \ b_{s} \in B_{S}$
+
+\phantom{1em} {\bf 1.} Let $v_{i}$ be $i^{th}$ vector in the basis $b_{v}$ and similarly $s_{j}$ be a $j^{th}$ vector in the basis $b_{s}$.
+
+\phantom{1em} {\bf 2.} Using Kronecker product, we can write different linear combinations of $b_{v} \otimes b_{s}$ as below\\
+\phantom{1000em} $\begin{bmatrix} a_{1}v_{1}[\sum b_{1}s_{j}] \\ a_{2}v_{2} [\sum b_{2}s_{j}]\\ \ldots \\ a_{i}v_{i} [\sum b_{j}s_{j}]\end{bmatrix}$
+
+\phantom{1em} {\bf 3.} Above matrix can be represented as below summation and spans the Vector space $V \otimes S$\\
+\phantom{1000em} $\sum\limits_{i=1}^m\sum\limits_{j=1}^n a_{i}b_{j}v_{i}s_{j}$ where m = dim(V) and n = dim(S)
+
+\phantom{1em} {\bf 4.} Basis $b_{v}$ and $b_{s}$ are orthonormal basis and can be treated as linearly independent. \\
+\phantom{1000em} As $B_{V} \otimes B_{S}$ spans $V \otimes S$ and linearly independent, we can consider that as its basis.\\
+\phantom{1000em} Dimension of $V \otimes S = dim(B_{V}) \times dim(B_{S})$
+
+{\bf 3.2} $R \otimes T = (R)_{B_{V} \rightarrow B_{A}} \otimes (T)_{B_{S} \rightarrow B_{B}}$
+
+\phantom{1em} {\bf 1.} We have $(R)_{B_{V} \rightarrow B_{A}} = \begin{bmatrix} -1 & 2 & -1 \\ 3 & -2 & -1 \end{bmatrix}$ and $(T)_{B_{S} \rightarrow B_{B}} = \begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix}$
+
+\phantom{1em} {\bf 2.} Using Kronecker's product, we get below matrix form\\
+
+\phantom{1000em} 
+$\begin{bmatrix}  
+-1 \begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix} & 2\begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix}  & -1\begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix} \\ 
+3 \begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix} & -2\begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix} & -1\begin{bmatrix}  -2 & 1\\ 1 & -2 \end{bmatrix} 
+\end{bmatrix}$\\
+
+\phantom{1000em} 
+$ = \begin{bmatrix}  
+2 & -1 & -4 & 2 & 2 & -1 \\ -1 & 2 & 2 & -4 & -1 & 2 \\ -6 & 3 & 4 & -2 & 2 & -1 \\ 3 & -6 & -2 & 4 & -1 & 2
+\end{bmatrix}$
+
+\end{document}

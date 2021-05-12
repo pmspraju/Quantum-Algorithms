@@ -1,0 +1,138 @@
+\documentclass [12pt]{article}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.25in}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=0.5in,bmargin=1.0in,lmargin=.70in,rmargin=.70in}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri,calc,matrix}
+\usepackage{slashbox}
+\usepackage{listings}
+\usepackage{ dsfont }
+\usepackage{ upgreek }
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+
+\newcommand{\ket}[1]{| {#1} \rangle}
+\newcommand{\bra}[1]{\langle {#1} |}
+\newcommand{\braket}[2]{\langle #1 \ | \ #2 \rangle}
+\newcommand{\qp}[2]{\langle #1 \ | \ #2 \ | \ #1 \rangle}
+\newcommand{\tensor}[2]{ #1 \otimes  #2 }
+\newcommand{\iz}[1]{\mathds{#1}^{n}}
+\newcommand{\md}[1]{|#1|}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\DeclareMathOperator{\Cspan}{ \CC-span }
+
+\title{Home Work 10}
+\author{Madhu Peduri}
+\date{04/20/2021}
+
+\begin{document}
+\section*{Homework 10}
+
+{\bf 1.1.} Prove $A = A_{0} \cup A_{1}$ and $A_{0} \cap A_{1}=\phi$ ?
+
+\phantom{1em} {\bf 1.} We know that $\iz{Z} = {0,1,2 \dots n}$ and \\
+\phantom{1000em} $\iz{Z}_{2} = {0,1,0,1 \dots l}$ is the cyclic group of order 2, where l = 0,1 if n = even,odd
+
+\phantom{1em} {\bf 2.} We have $A \leq \iz{Z}_{2}$ and $g \in \iz{Z}_{2}$ and \\
+\phantom{1000em} $A_{0} = \{a \in A|a.g=0\}, A_{1} = \{a \in A, g \neq 0|a.g=1 \}$, where $A_{0}, A_{1}$ are right cosets of A
+
+\phantom{1em} {\bf 3.} If $e$ is the identity, then $e \in A\Rightarrow g \in A.g\ \forall\ g \in \iz{Z}_{2}$\\
+\phantom{1000em} We can say that, all right cosets $A.g$ are non empty \\
+\phantom{1000em} For a given `g' $A_{0}$ is the coset having all zeroes of subgroup A and\\
+\phantom{1000em} For a given `g' $A_{1}$ is the coset having all ones of subgroup A and\\
+\phantom{1000em} $\Rightarrow A = A_{0} \cup A_{1}$ 
+
+\phantom{1em} {\bf 4.} Suppose cosets are not disjoint $A_{0} \cap A_{1} \neq \phi$ \\
+\phantom{1000em} Let $g \in A_{0} \cap A_{1}$\\
+\phantom{1000em} Then there is $h,k \in A$ and  such that $g = ph = qk$ where $p \in A_{0} \ and \ q \in A_{1}$\\
+\phantom{1000em} $\Rightarrow p=qkh^{-1} \in qA$ and $q=phk^{-1} \in pA$\\
+\phantom{1000em} Let $ph^{`} \in pA$\\
+\phantom{1000em} $ph^{`} = qkh^{-1}h^{`}$ \\
+\phantom{1000em} $\Rightarrow ph^{`}$ is of the form qA $\Rightarrow ph^{`} \in qA$\\
+\phantom{1000em} Thus $pA \subset qA$ and by symmetry $qA \subset pA$\\
+\phantom{1000em} $\Rightarrow pA = qA \Rightarrow A_{0} = A_{1}$
+
+\phantom{1000em} By our assumption $A_{0} \cap A_{1} \neq \phi$ resulted in cosets being $A_{0} = A_{1}$\\
+\phantom{1000em} $\Rightarrow$ cosets $A_{0}, A_{1}$ are disjoint \\
+\phantom{1000em} $\Rightarrow A_{0} \cap A_{1}=\phi$
+
+{\bf 1.2.} Prove that $a + A_{0} = A_{1}$ and $a + A_{1} = A_{0} \Rightarrow \md{A_{0}}=\md{A_{1}}$ if $A_{1}  \neq \phi$
+
+\phantom{1em} {\bf 1.} We know that $\iz{Z}_{2}$ consists of two cosets,\\
+\phantom{1000em} $A_{0}$, the even numbers and $A_{1}$, the odd numbers
+
+\phantom{1em} {\bf 2.} We can write,\\
+\phantom{1000em} $A_{0} = \{ \dots ,-4, -2, 0, 2, 4, \dots \} = 0 + 2\mathds{Z}$\\
+\phantom{1000em} $A_{1} = \{ \dots ,-3, -1, 1, 3, 5, \dots \} = 1 + 2\mathds{Z}$ 
+
+\phantom{1em} {\bf 3.} Say $ a = 1 \in A_{1}$,\\
+\phantom{1000em} $a + A_{0} = \{ \dots, -3, -1, 1, 3, 5, \dots \}$\\
+\phantom{1000em} $a + A_{1} = \{ \dots, -4, -2, 0, 2, 4, \dots \}$\\
+\phantom{1000em} Above cosets remain same for any value $a \in A_{1}$
+
+\phantom{1em} {\bf 4.} From above points, we can say that,\\
+\phantom{1000em} $a + A_{0} = A_{1}$ and the number of elements in $A_{0}, A_{1}$ are equal. \\
+\phantom{1000em} $a + A_{1} = A_{0}$ and the number of elements in $A_{0}, A_{1}$ are equal. \\
+\phantom{1000em} $\Rightarrow \md{A_{0}} = \md{A_{1}}$ where $\md{A_{1}} \neq \phi$
+
+{\bf 1.3.} Prove that $\sum_{a\in A} (-1)^{a\cdot g} = 
+	\begin{cases}
+   		|A| & \text{if } a\cdot g = 0 \text{ for all } a\in A, \\
+     	0   & \text{otherwise}.
+    \end{cases}$
+    
+\phantom{1em} {\bf 1.} We know that, $A = A_{0} \cup A_{1} \Rightarrow \md{A} = \md{A_{0}} + \md{A_{1}}$\\
+\phantom{1000em} $\sum_{a\in A} (-1)$ is the summation of $(-1) = (-1 + -1 + \dots + \md{A})$
+
+\phantom{1em} {\bf 2.} $\sum_{a\in A} (-1)^{a\cdot g} = \sum_{a\in A} 1$, if $a.g=0$\\
+\phantom{1000em} $\Rightarrow \sum_{a \in A} 1 = (1 + 1 + \dots + \md{A}) = \md{A}$
+
+\phantom{1em} {\bf 3.} We know that subgroup $A$ has equal number of odd and even numbers\\
+\phantom{1000em} $\md{A_{0}} = \md{A_{1}}$ \\
+\phantom{1000em} $\Rightarrow \sum_{a\in A} (-1)^{a\cdot g} = 0$
+
+{\bf 3.} Prove that A is maximal if and only if $A^{\perp}$ is minimal
+
+\phantom{1em} {\bf 1.} Let $P \in A^{\perp} and a \in A$\\
+\phantom{1000em} $\Rightarrow P . a = 0$
+
+\phantom{1em} {\bf 2.} Say we have another subgroup $A \leq B$\\
+\phantom{1000em} Let $Q \in B^{\perp}$ and $b \in B$\\
+\phantom{1000em} $\Rightarrow Q . b = 0$\\
+\phantom{1000em} $\Rightarrow Q . a = 0$ as $A \leq B \Rightarrow Q \in A^{\perp}$\\
+\phantom{1000em} $\Rightarrow B^{\perp} \leq A^{\perp}$
+
+\phantom{1em} {\bf 3.} Using point 2, by symmetry, we can say\\
+\phantom{1000em} If $B \leq A$, then $A^{\perp} \leq B^{\perp}$\\
+\phantom{1000em} $\Rightarrow$ If A is maximal if and only if $A^{\perp}$ is minimal 
+
+\end{document}
